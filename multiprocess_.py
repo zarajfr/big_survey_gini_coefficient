@@ -38,6 +38,8 @@ def target_invoke(*args):
 
 def dataframe_multiprocess(**kwargs):
 
+    # assign function to be performed on your data set, as well as data, how to split and parameters
+    function_args = []
     for key, val in kwargs.items():
         if key == 'function':
             function = val
@@ -46,8 +48,8 @@ def dataframe_multiprocess(**kwargs):
         elif key == 'splitgroup':
             splitgroup = val
         else:
-            print("else")
-
+            function_args.append(val)
+    # change number of processes if you don't want to use all your (logical) cores
     procs = multiprocessing.cpu_count()
 
     if 'splitgroup' not in kwargs or splitgroup == None:
@@ -62,6 +64,7 @@ def dataframe_multiprocess(**kwargs):
         temporary_batches = []
         for i in range(procs):
             temporary_batches.append('temporary_batch_' + str(i) + '.feather')
+        # this requires your data to be sorted based on the key column
         df_bins = df_[splitgroup].drop_duplicates(keep='first').reset_index(drop=False)
         df_splits = np.array_split(df_bins, procs)
         for i in range(len(df_splits)):
@@ -73,6 +76,7 @@ def dataframe_multiprocess(**kwargs):
             df_batches = df_[start_i: end_i].reset_index(drop=True)
             df_batches.to_feather(temporary_batches[i], compression='lz4')
             del df_batches
+    # remove the large data frame from memory
     del df_
     gc.collect()
 
@@ -96,26 +100,3 @@ def dataframe_multiprocess(**kwargs):
     df = df.reset_index(drop=True)
 
     return df
-
-def function1(df_cut):
-    temp = []
-    for i in range(len(df_cut)):
-        if (df_cut.iloc[i]["HIGHEST_EDUCATION_2"] == 1):
-            temp.append(3)
-        else:
-            if (df_cut.iloc[i]["HIGHEST_EDUCATION_1"] == 1):
-                temp.append(2)
-            else:
-                if(df_cut.iloc[i]["HIGHEST_EDUCATION_0"] == 1):
-                    temp.append(1)
-                else:
-                    temp.append(0)
-
-    df_cut['Education_Level'] = temp
-    return df_cut
-
-if __name__ == '__main__':
-
-    df_survey = pd.read_csv("df_cut.csv", delimiter = ',', header = 0)
-    df_result = dataframe_multiprocess(function = function1, data_frame = df_survey)
-    print(df_result.head())
