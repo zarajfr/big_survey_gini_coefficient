@@ -14,7 +14,6 @@ import os
 import io
 import glob
 import gc
-# import geopandas as gpd
 import pandas as pd
 
 # I used bits from caffeinated pandas from Scollay
@@ -87,7 +86,7 @@ def dataframe_multiprocess(**kwargs):
     processes = []
 
     for i in range(procs):
-        process = multiprocessing.Process(target = target_invoke, args = (function, temporary_batches[i]))
+        process = multiprocessing.Process(target = target_invoke, args = [function, temporary_batches[i]]+ function_args )
         processes.append(process)
         process.start()
 
