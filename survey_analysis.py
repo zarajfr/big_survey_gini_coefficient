@@ -40,6 +40,6 @@ if __name__ == '__main__':
     df_survey = pd.read_csv("df_cut.csv", delimiter = ',', header = 0)
     df_result_1 = mp.dataframe_multiprocess(function = function1, data_frame = df_survey)
 
-    # df_result_1.to_csv('df_cut_1.csv')
+    df_result_1.to_csv('df_cut_1.csv')
     # print(df_result_2.head(2))
     # print(df_result_2.columns)
