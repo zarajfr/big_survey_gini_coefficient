@@ -43,7 +43,7 @@ def function_3(df_cut, df_out):
 
 
 if __name__ == '__main__':
-    p_data = {'FID' : [0] * 8, 'num_resp_found': [0] * 8, 'num_landowners_found': [0] * 8, 'education_per_village': [0] * 8 }
+    p_data = {'FID' : [0] * multiprocessing.cpu_count(), 'num_resp_found': [0] * multiprocessing.cpu_count(), 'num_landowners_found': [0] * multiprocessing.cpu_count(), 'education_per_village': [0] * multiprocessing.cpu_count() }
     df_2 = pd.DataFrame(p_data)
     df_survey = pd.read_csv("df_cut_1.csv", delimiter = ',', header = 0)
     df_result = mp.dataframe_multiprocess(function = function_3, data_frame = df_survey, data_frame_2 = df_2)
