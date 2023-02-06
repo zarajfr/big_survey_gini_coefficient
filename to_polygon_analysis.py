@@ -52,5 +52,5 @@ if __name__ == '__main__':
     # print(len(df_result[df_result["education_per_village"]>0]))
 
     df_result1 = df_result.groupby(['FID']).sum()
-    print(len(df_result1))
+    # print(len(df_result1))
     df_result1.to_csv('village_indicator_0.csv')
