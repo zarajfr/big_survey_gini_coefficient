@@ -139,38 +139,7 @@ if __name__ == '__main__':
     df_com = pd.concat([bisp_fid,df_0_fid_found_m,df_0_fid_0], ignore_index=False)
     print(len(df_com[df_com['fid']==0]))
     df_com.to_csv('BISP_keyed_comp.csv')
-    # df_0_fid.loc[df_0_fid['index'].isin(df1), 'fid'] = df1['fid1']
-    # df_result_1 = mp.dataframe_multiprocess(function = correct_fid_1, data_frame = df_0_fid, other = df_correct_11 )
-    # df_result_2 = mp.dataframe_multiprocess(function = correct_fid_2, data_frame = df_result_1, other = df_correct_22)
-    #
-    # print(len(df_result_2[df_result_2['fid']==0]))
-    # df_result_2.to_csv('BISP_keyed_comp_2.csv')
-    # df_complete_x = pd.concat([bisp_fid, df_result_2], ignore_index=False)
-    # print(len(df_complete_x[df_complete_x['fid']==0]))
-    # df_complete_x.to_csv('BISP_keyed_comp.csv')
-#
-# df_x = pd.read_csv("x.csv", delimiter = ',', header = 0)
-# df_x = df_x.drop_duplicates(subset=['VILLAGE_NAME','TEHSIL_NAME'])
-# recovery_village(df_x)
-    # df_0_fid['VILLAGE_TEHSIL'] = list(zip(df_0_fid.VILLAGE_NAME, df_0_fid.TEHSIL_NAME))
-    # df_0_fid['UC_TEHSIL'] = list(zip(df_0_fid.UNIONCOUNCIL_NAME, df_0_fid.TEHSIL_NAME))
-    # df_correct_1['VILLAGE_TEHSIL'] = list(zip(df_correct_1.VILLAGE_NAME, df_correct_1.TEHSIL_NAME))
-    # df_correct_2['UC_TEHSIL'] = list(zip(df_correct_2.UNIONCOUNCIL_NAME, df_correct_2.TEHSIL_NAME))
-    # print(len(df_0_fid))
-    # x = df_0_fid[df_0_fid['VILLAGE_TEHSIL'].isin(df_correct_1['VILLAGE_TEHSIL'])]
-    # print(len(x))
-    # y = df_0_fid[ ~(df_0_fid['VILLAGE_TEHSIL'].isin(df_correct_1['VILLAGE_TEHSIL']))]
-    # z = y[y['UC_TEHSIL'].isin(df_correct_2['UC_TEHSIL'])]
-    # print(len(z))
-    # df_0_fid['fid'] = df_0_fid.apply(lambda x: df_correct_11.loc[x['VILLAGE_TEHSIL'] == df_correct_11['VILLAGE_TEHSIL'], x['fid']].reset_index(drop=True), axis=1)
-    # df_0_fid['fid'] = df_0_fid.apply(lambda x: df_correct_22.loc[x['UC_TEHSIL'] == df_correct_22['UC_TEHSIL'], x['fid']].reset_index(drop=True), axis=1)
-# print( df_correct_2.loc[df_correct_2['VILLAGE_NAME']=='chak jano kalan','Score'] )
-# df_recovered_1 = df_0_fid[ df_0_fid['VILLAGE_NAME'].isin(df_correct_1['VILLAGE_NAME']) ]
-# df_0_fid.loc[ df_0_fid['VILLAGE_NAME'].isin(df_correct_1['VILLAGE_NAME']), 'fid'] = village_layer.loc[village_layer['FULL_NAM_2'] == ]
-# df_0_fid.loc[df_0_fid['VILLAGE_NAME'].isin(df_correct_1['VILLAGE_NAME']), 'fid'] = village_layer[village_layer['FULL_NAM_2'] == ]
-# df_not_recovered_1 = df_0_fid[ ~ ( df_0_fid['VILLAGE_NAME'].isin(df_correct_1['VILLAGE_NAME']) ) ]
-# df_not_recovered_2 = df_not_recovered_1[ df_not_recovered_1['UNIONCOUNCIL_NAME'].isin(df_correct_2['UNIONCOUNCIL_NAME']) ]
-# print(len(df_not_recovered_2))
+
 # df_matchings = pd.read_csv('villages_mp_1.csv')
 # village_layer = gpd.GeoDataFrame.from_file('villages_landowners.shp')
 # village_layer = village_layer[ ~(village_layer['geometry'] == None) ]
