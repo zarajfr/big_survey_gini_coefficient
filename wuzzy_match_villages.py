@@ -20,12 +20,6 @@ from pathlib import Path
 from thefuzz import fuzz
 from thefuzz import process
 
-# df = pd.read_csv('villages_fuzzy_in_tehsil.csv')
-# x = df.sort_values(by=['best_match_score'], ascending=False)
-# x.to_csv('sorted_villages_fuzzy_in_tehsil.csv')
-
-# df_t = pd.read_csv('matched_tehsils.csv')
-# #went with Summundari instead of Jaranwala
 df_t_0 = pd.read_csv('matched_tehsils_tand.csv')
 #went with tandiwala itself
 l = ['Summundari', 'Tandlianwala']
@@ -37,13 +31,8 @@ village_layer_s = village_layer[['fid','FULL_NAM_2', 'TEHSIL']]
 def find_village_matches(df_0_fid_s, matched_results):
     tnn, tn, sc, vn, fd, fn = [], [], [],[],[],[]
     for i in range(len(df_0_fid_s)):
-        # print(df_0_fid_s.iloc[i]['TEHSIL_NAME'])
-        # print(df_0_fid_s.iloc[i]['VILLAGE_NAME'])
         village_layer_s0 = village_layer_s[village_layer_s['TEHSIL'] == df_0_fid_s.iloc[i]['TEHSIL']]
         village_layer_ss = village_layer_s0
-        # if(df_0_fid_s.iloc[i]['TEHSIL'] == 'Summundari'):
-        #     extra_tehsil = village_layer_s[village_layer_s['TEHSIL'] == 'Jaranwala']
-        #     village_layer_ss = pd.concat([village_layer_s0, extra_tehsil], ignore_index=True)
         y = process.extractOne(df_0_fid_s.iloc[i]['VILLAGE_NAME'], village_layer_ss['FULL_NAM_2'])
         tnn.append(df_0_fid_s.iloc[i]['TEHSIL_NAME'])
         tn.append(df_0_fid_s.iloc[i]['TEHSIL'])
